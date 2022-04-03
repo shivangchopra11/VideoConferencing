@@ -6,11 +6,7 @@ import { RecordWebcamOptions, Recorder } from '../../utils/types';
 import { saveFile } from '../../utils/utils';
 import { CAMERA_STATUS, NAMESPACES, RECORDER_OPTIONS } from '../../constants';
 
-import "@tensorflow/tfjs-core";
-import "@tensorflow/tfjs-converter";
-import "@tensorflow/tfjs-backend-webgl";
-import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
-import { MediaPipeFaceMesh } from "@tensorflow-models/face-landmarks-detection/dist/types";
+import * as faceApi from "face-api.js";
 
 
 type RenderControlsArgs = {
@@ -44,6 +40,7 @@ type RecordWebcamProps = {
 
 type RecordWebcamState = {
   status: keyof typeof CAMERA_STATUS;
+  facesDetected: boolean;
 };
 
 export class RecordWebcam extends React.PureComponent<
@@ -66,6 +63,7 @@ export class RecordWebcam extends React.PureComponent<
   }
   state = {
     status: CAMERA_STATUS.CLOSED,
+    facesDetected: false,
   };
   recorder!: Recorder;
   recorderOptions = {
@@ -93,7 +91,6 @@ export class RecordWebcam extends React.PureComponent<
       captureAudio: this.props.options?.captureAudio,
     },
   };
-  model!: MediaPipeFaceMesh;
   webcamRef = React.createRef<HTMLVideoElement>();
   previewRef = React.createRef<HTMLVideoElement>();
 
@@ -130,22 +127,6 @@ export class RecordWebcam extends React.PureComponent<
     await new Promise((resolve) => setTimeout(resolve, 1700));
   }
 
-  async detect (model: MediaPipeFaceMesh)  {
-    if (this.webcamRef.current) {
-      const webcamCurrent = this.webcamRef.current as any;
-      // go next step only when the video is completely uploaded.
-      // if (webcamCurrent.srcObject.readyState === 4) {
-      const video = webcamCurrent;
-      const predictions = await model.estimateFaces({
-        input: video,
-      });
-      if (predictions.length) {
-        console.log(predictions);
-      }
-      // }
-    };
-  };
-
   closeCamera() {
     if (this.recorder.stream.id) this.recorder.stream.stop();
   }
@@ -178,9 +159,8 @@ export class RecordWebcam extends React.PureComponent<
       this.setState({
         status: CAMERA_STATUS.INIT,
       });
-      // this.model = await faceLandmarksDetection.load(
-      //   faceLandmarksDetection.SupportedPackages.mediapipeFacemesh
-      // );
+      await faceApi.nets.tinyFaceDetector.load("/models/");
+      await faceApi.loadFaceExpressionModel(`/models/`);
       await this.openCamera();
       this.setState({
         status: CAMERA_STATUS.OPEN,
@@ -254,6 +234,39 @@ export class RecordWebcam extends React.PureComponent<
     }
   }
 
+  onPlay = async () => {
+    if (
+      this.webcamRef.current!.paused ||
+      this.webcamRef.current!.ended ||
+      !faceApi.nets.tinyFaceDetector.params
+    ) {
+      setTimeout(() => this.onPlay());
+      return;
+    }
+
+    const options = new faceApi.TinyFaceDetectorOptions({
+      inputSize: 512,
+      scoreThreshold: 0.5
+    });
+
+    const result = await faceApi
+      .detectSingleFace(this.webcamRef.current!, options)
+      .withFaceExpressions();
+
+    if (result) {
+      console.log(result);
+      this.setState({
+        facesDetected: true,
+      });
+    } else {
+      this.setState({
+        facesDetected: false,
+      });
+    }
+
+    setTimeout(() => this.onPlay(), 1000);
+  };
+
   render() {
     return (
       <>
@@ -326,19 +339,32 @@ export class RecordWebcam extends React.PureComponent<
               
             ) : 
             (
-              <Video
-                cssNamespace={this.props.cssNamespace}
-                style={{
-                  display: `block`,
-                  backgroundColor: 'black',
-                  height: '360px',
-                  width: '600px',
-                }}
-                autoPlay
-                muted
-                loop
-                ref={this.webcamRef}
-              />
+              <>
+                <Video
+                  cssNamespace={this.props.cssNamespace}
+                  style={{
+                    display: `block`,
+                    backgroundColor: 'black',
+                    height: '360px',
+                    width: '600px',
+                  }}
+                  onPlay={this.onPlay}
+                  autoPlay
+                  muted
+                  loop
+                  ref={this.webcamRef}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '22%',
+                    left: '40%',
+                  }}>
+                  {
+                    !this.state.facesDetected && <h1>No Face Detected</h1>
+                  }
+                </div>
+              </>
             )
           }
         </div>

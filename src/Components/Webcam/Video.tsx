@@ -7,11 +7,12 @@ type VideoProps = {
   loop: boolean;
   style: React.CSSProperties;
   ref: React.RefObject<HTMLVideoElement>;
+  onPlay?: any;
 };
 
 export const Video = React.forwardRef<HTMLVideoElement, VideoProps>(
   (
-    { autoPlay, cssNamespace, muted, loop, style },
+    { autoPlay, cssNamespace, muted, loop, style, onPlay },
     ref: React.Ref<HTMLVideoElement>
   ): React.ReactElement<HTMLVideoElement> => (
     <video
@@ -21,6 +22,7 @@ export const Video = React.forwardRef<HTMLVideoElement, VideoProps>(
       muted={muted}
       ref={ref}
       loop={loop}
+      onPlay={onPlay}
     />
   )
 );

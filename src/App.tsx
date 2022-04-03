@@ -13,7 +13,7 @@ import HeadBar from './Components/HeadBar/HeadBar';
 
 function App() {
   const [showVideo, setShowVideo] = useState(true);
-  const [muteAudio, setMuteAudio] = useState(false);
+  const [muteAudio, setMuteAudio] = useState(true);
   const enter = 1;
   const constraints = {
     audio: Mute,

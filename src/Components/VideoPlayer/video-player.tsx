@@ -8,7 +8,7 @@ export class VideoPlayerComponent extends Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            muted: false,
+            muted: true,
             videoOff: false,
         }
     }
@@ -18,7 +18,6 @@ export class VideoPlayerComponent extends Component<any, any> {
             muted: nextProps.muteAudio,
             videoOff: !nextProps.showVideo,
         });
-        this.forceUpdate();
       }
 
     render() {
