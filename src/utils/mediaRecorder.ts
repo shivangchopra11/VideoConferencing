@@ -27,7 +27,6 @@ export async function mediaRecorder(
   if (!navigator.mediaDevices.getUserMedia) {
     throw new Error('Browser does not support getUserMedia');
   }
-  console.log("Options", options);
   const { stream, recordRtc } = await captureUserMedia(options);
 
   const supported = navigator.mediaDevices.getSupportedConstraints();

@@ -29,8 +29,6 @@ export class WebcamComponent extends Component<VideoProps, any> {
     }
 
     componentWillReceiveProps(nextProps: any) {
-        console.log("Component recieved props");
-        console.log("Next props", nextProps);
         this.setState({
             options: {
                 filename: 'test-filename',

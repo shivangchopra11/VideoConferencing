@@ -5,7 +5,6 @@ import "./HeadBar.css";
 
 const HeadBar = (_: any) => {
   const [search, setSearch] = useState("");
-  console.log(search);
 
   return (
     <div className="headBar">

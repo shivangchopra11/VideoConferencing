@@ -59,7 +59,6 @@ export class RecordWebcam extends React.PureComponent<
     this.handleStartRecording = this.handleStartRecording.bind(this);
     this.handleStopRecording = this.handleStopRecording.bind(this);
     this.openCamera = this.openCamera.bind(this);
-    console.log("Props", props);
   }
   state = {
     status: CAMERA_STATUS.CLOSED,
@@ -99,7 +98,6 @@ export class RecordWebcam extends React.PureComponent<
   };
 
   componentWillReceiveProps(nextProps: RecordWebcamProps) {
-    console.log('Record props', nextProps);
     this.handleCloseCamera();
     if (nextProps.options?.captureVideo) {
       this.setState({
@@ -254,7 +252,6 @@ export class RecordWebcam extends React.PureComponent<
       .withFaceExpressions();
 
     if (result) {
-      console.log(result);
       this.setState({
         facesDetected: true,
       });
