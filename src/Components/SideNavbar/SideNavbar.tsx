@@ -7,11 +7,8 @@ import TeamsImg from "../../Assets/Images/teams.png";
 import TeamsHoverImg from "../../Assets/Images/teams-hover.png";
 import FilesImg from "../../Assets/Images/files.png";
 import FilesHoverImg from "../../Assets/Images/files-hover.png";
-// import { useHistory, useLocation } from "react-router-dom";
 
 const SideNavbar = (props: any) => {
-//   const history = useHistory();
-//   const location = useLocation();
   const [active, setActive] = useState();
   
   return (
@@ -24,8 +21,6 @@ const SideNavbar = (props: any) => {
         <div
           className={"sideNavlink"}
           onClick={(e) => {
-            // history.push("/chat");
-            // setActive("Chat");
           }}
         >
           <div>
@@ -36,8 +31,6 @@ const SideNavbar = (props: any) => {
         <div
           className="sideNavlink"
           onClick={(e) => {
-            // history.push("/teams");
-            // setActive("Teams");
           }}
         >
           <div className={"activeLink"}>
@@ -46,15 +39,12 @@ const SideNavbar = (props: any) => {
               src={active === "Teams" ? TeamsHoverImg : TeamsImg}
               alt="teams"
             />
-            {/* <img src={TeamsHoverImg} alt="teams" className="hoverSideBarIcon" /> */}
           </div>
           <div className={"activeSideNavLink"}>Teams</div>
         </div>
         <div
           className="sideNavlink"
           onClick={(e) => {
-            // history.push("/contacts");
-            // setActive("Contacts");
           }}
         >
           <div>

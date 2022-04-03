@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 import {WebcamComponent} from './Components/Webcam/webcam';
 import {VideoPlayerComponent} from './Components/VideoPlayer/video-player';
@@ -14,17 +13,12 @@ import HeadBar from './Components/HeadBar/HeadBar';
 function App() {
   const [showVideo, setShowVideo] = useState(true);
   const [muteAudio, setMuteAudio] = useState(true);
-  const enter = 1;
-  const constraints = {
-    audio: Mute,
-    video: VideoOn,
-  };
   return (
     <div>
       <div>
         <SideNavbar />
         <HeadBar />
-        {enter === 1 && (
+        {(
             <div className="videoCalling">
             <div className="headVideoPanel">
                 <div className="controlVideo" onClick={() => {

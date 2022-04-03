@@ -300,25 +300,6 @@ export class RecordWebcam extends React.PureComponent<
             getRecording: this.getRecording,
             status: this.state.status,
           })}
-          {/* {!this.props.render && (
-            <div className={`${this.props.cssNamespace}__status`}>
-              {`Status: ${this.state.status}`}
-            </div>
-          )} */}
-          {/* {!this.props.render && (
-            <Controls
-              closeCamera={this.handleCloseCamera}
-              cssNamespace={this.props.cssNamespace}
-              download={this.download}
-              getRecording={this.getRecording}
-              labels={this.props.controlLabels}
-              openCamera={this.handleOpenCamera}
-              retake={this.handleRetakeRecording}
-              start={this.handleStartRecording}
-              status={this.state.status}
-              stop={this.handleStopRecording}
-            />
-          )} */}
           {
             this.state.status === CAMERA_STATUS.CLOSED ? 
             (

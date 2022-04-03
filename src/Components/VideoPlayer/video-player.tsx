@@ -1,6 +1,5 @@
 import { Component } from "react";
 import ReactPlayer from 'react-player'
-// import { Player } from 'react-custom-videoplayer';
 import sundarVideo from '../../Assets/Videos/Sundar.mp4';
 
 export class VideoPlayerComponent extends Component<any, any> {

@@ -1,18 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Dropdown } from "react-bootstrap";
-// import { useHistory } from "react-router-dom";
-// import { UserContext } from "../../../App";
 
 import "./HeadBar.css";
 
 const HeadBar = (_: any) => {
-//   const { state, dispatch } = useContext(UserContext);
   const [search, setSearch] = useState("");
-//   const history = useHistory();
   console.log(search);
-
-  // function to clear the search
-//   const clearResultHandler = () => setSearch();
 
   return (
     <div className="headBar">
@@ -65,9 +58,6 @@ const HeadBar = (_: any) => {
                   <div
                     className="signout"
                     onClick={() => {
-                      // function to clear the user data in the local storage and state
-                    //   localStorage.clear();
-                    //   dispatch({ type: "CLEAR" });
                     }}
                   >
                     Sign Out
