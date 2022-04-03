@@ -1,0 +1,82 @@
+.sideNavbar {
+    height: 100vh;
+    width: 65px;
+    background-color: #0a0a0a;
+    position: fixed;
+    /* margin-right: 60px; */
+    color: #eee;
+    text-align: center;
+    top: 50px;
+  }
+  .bottomNavbar {
+    width: 100%;
+    bottom: 0;
+    height: 60px;
+    position: fixed;
+    background-color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sideNavbar div {
+    padding-top: 5px;
+  }
+  .sideNavlink {
+    font-size: 10px;
+    padding: 10px;
+    cursor: pointer;
+    /* border-left: 4px solid #7f81e1; */
+  }
+  .activeLink {
+    border-left: 2px solid #7f81e1;
+  }
+  .sideNavlink div{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .sideNavlink .activeSideNavLink {
+    color: #7f81e1;
+    font-weight: 500;
+    border-left: 2px solid #7f81e1;
+  }
+  .hoverSideBarIcon {
+    width: 0;
+    height: 0;
+  }
+  .currentSideBarIcon:hover {
+    /* display: none; */
+    color: #7f81e1;
+  }
+  .hoverSideBarIcon:hover {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .bottomNavbar .sideNavItems {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 10px;
+    text-align: center;
+    color: #eee;
+    width: 100%;
+  }
+  .bottomNavbar .sideNavlink {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 10px;
+  }
+  .bottomNavbar .activeLink {
+    /* border-bottom: 2px solid #7f81e1; */
+    border-left: none;
+    text-align: center;
+  }
+  .bottomNavbar .sideNavlink .activeSideNavLink {
+    color: #7f81e1;
+    font-weight: 500;
+    border-bottom: 3px solid #7f81e1;
+    border-left: none;
+    /* padding: 0 5px; */
+    text-align: center;
+  }
